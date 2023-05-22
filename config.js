@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config();
 
 export const BASE_URL = process.env.BASE_URL;
-export const LISTEN_PORT = parseInt(process.env.LISTEN_PORT);
+export const LISTEN_PORT = parseInt(process.env.PORT);
 
 export const HELMET_OPTIONS = {
     contentSecurityPolicy: {
