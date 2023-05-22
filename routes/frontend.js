@@ -18,6 +18,16 @@ frontendRoutes.get('/random', async (req, res) => {
     }
 });
 
+frontendRoutes.get('/dash', async (req, res) => {
+    try {
+        const quote = await quoteManager.getRandomQuote();
+        const autoUpdate = true;
+        res.render('quote', { quote, autoUpdate } );
+    } catch(error) {
+        res.send(error.toString());
+    }
+});
+
 frontendRoutes.get('/:uuid', async (req, res) => {
     try {
         const quote = await quoteManager.getQuote(req.params.uuid);
