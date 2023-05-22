@@ -12,14 +12,7 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 
 // Middleware
-app.use(helmet({
-    contentSecurityPolicy: {
-        directives: {
-            "script-src": ["'self'", "code.jquery.com", "maxcdn.bootstrapcdn.com", "cdnjs.cloudflare.com"],
-            "style-src": ["'self'", "maxcdn.bootstrapcdn.com"],
-        },
-    },
-}));
+app.use(helmet(Config.HELMET_OPTIONS));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true}));
 app.use(urlCompose);
