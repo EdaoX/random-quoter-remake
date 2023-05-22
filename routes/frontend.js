@@ -28,7 +28,7 @@ frontendRoutes.get('/dash', async (req, res) => {
     }
 });
 
-frontendRoutes.get('/:uuid', async (req, res) => {
+frontendRoutes.get('/:uuid(\\w{13}|\\w{15}|\\w{18})', async (req, res) => {
     try {
         const quote = await quoteManager.getQuote(req.params.uuid);
         const autoUpdate = false;
