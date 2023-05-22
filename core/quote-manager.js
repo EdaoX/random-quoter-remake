@@ -1,0 +1,27 @@
+import Quote from "./quote.js";
+
+export default class QuoteManager
+{
+    constructor(repository)
+    {
+        this.repository = repository;
+    }
+
+    async getQuote(uuid)
+    {
+        const quoteData = await this.repository.retrieve(uuid);
+        if(!quoteData) {
+            throw new Error('Quote not found');
+        }
+        return Quote.fromData(quoteData);
+    }
+
+    async getRandomQuote()
+    {
+        const quoteData = await this.repository.retrieveRandom();
+        if(!quoteData) {
+            throw new Error('Quote not found');
+        }
+        return Quote.fromData(quoteData);
+    }
+}
