@@ -3,7 +3,7 @@ extends layouts/layout.pug
 block content
     .card
         .card-block
-            form(action="/quotes/create" method="POST")
+            form(action="/quote/create" method="POST")
                 .form-group
                     label(for="quote-body") Citazione
                     textarea#quote-body(name="quote-body" placeholder="La tua citazione").form-control
