@@ -10,4 +10,8 @@ block content
                 .form-group
                     label(for="quote-author") Autore
                     input#quote-author(type="text" name="quote-author" placeholder="Autore").form-control
-                button(type="submit").btn.btn-primary Invia
+                .d-flex.justify-content-between.align-items-center
+                    button(type="submit").btn.btn-primary Invia
+                    .custom-control.custom-switch
+                        input#nsfw-switch.custom-control-input(type="checkbox" name="nsfw")
+                        label.custom-control-label.prevent-select(for="nsfw-switch") NSFW

@@ -6,5 +6,5 @@ export default class Repository
 
     async retrieve(uuid){}
 
-    async retrieveRandom(){}
+    async retrieveRandom(hideNsfw = false){}
 }

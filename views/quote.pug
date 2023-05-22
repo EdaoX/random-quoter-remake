@@ -1,6 +1,8 @@
 extends layouts/layout.pug
 
 block content
+    if updateUrl
+        div.hidden(data-refresh-url=updateUrl)
     .quote
         h3.body= quote.getBody()
         h4.author= quote.getAuthor()

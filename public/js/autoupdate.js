@@ -6,6 +6,7 @@ $(function () {
 	const $quoteAuthor = $('.author');
 	const $link = $('.link');
 	const $quoteCopyButton = $('.quoter-icon-button');
+	const refreshUrl = $('[data-refresh-url]').data('refresh-url');
 	const timeout = 60; // Seconds
 
 	function handleNewQuote(quote) {
@@ -20,7 +21,7 @@ $(function () {
 	}
 
 	setInterval(function () {
-		$.get('/api/quote/random', {}, handleNewQuote);
+		$.get(refreshUrl, {}, handleNewQuote);
 	}, timeout * 1000);
 
 });

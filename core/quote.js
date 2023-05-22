@@ -3,12 +3,13 @@ import { generateDatetime } from './utilities.js';
 
 export default class Quote
 {
-    constructor(author, body, creationDatetime = null)
+    constructor(author, body, nsfw = false, creationDatetime = null)
     {
-        this.author = author;
-        this.body = body;
-        this.creationDatetime = creationDatetime || generateDatetime();
-        this.uuid = uniqid();
+        this.setUuid(uniqid());
+        this.setAuthor(author);
+        this.setBody(body);
+        this.setCreationDatetime(creationDatetime || generateDatetime());
+        this.setNsfw(nsfw);
     }
 
     getUuid()
@@ -41,6 +42,16 @@ export default class Quote
         this.body = body;
     }
 
+    isNsfw()
+    {
+        return this.nsfw;
+    }
+
+    setNsfw(nsfw)
+    {
+        this.nsfw = nsfw;
+    }
+
     getCreationDatetime()
     {
         return this.creationDatetime;
@@ -57,12 +68,13 @@ export default class Quote
         const body = this.getBody();
         const created_at = this.getCreationDatetime();
         const uuid = this.getUuid();
-        return {author, body, uuid, created_at};
+        const nsfw = this.isNsfw();
+        return {author, body, uuid, nsfw, created_at};
     }
 
-    static fromData({author, body, uuid, created_at})
+    static fromData({author, body, uuid, nsfw, created_at})
     {
-        const quote = new Quote(author, body, created_at);
+        const quote = new Quote(author, body, nsfw, created_at);
         quote.setUuid(uuid);
         return quote;
     }

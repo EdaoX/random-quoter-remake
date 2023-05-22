@@ -30,9 +30,15 @@ export default class JsonRepository extends Repository
         return quoteData.find(datum => datum.uuid === searchedUuid);
     }
 
-    async retrieveRandom()
+    async retrieveRandom(hideNsfw = false)
     {
         const quoteData = await this.getQuoteData();
+
+        if(hideNsfw) {
+            let arr = quoteData.filter(datum => !datum.nsfw);
+            return pickRandomFromArray(arr);
+        }
+
         return pickRandomFromArray(quoteData);
     }
 

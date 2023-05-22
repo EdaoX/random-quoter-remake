@@ -7,9 +7,9 @@ export default class QuoteManager
         this.repository = repository;
     }
 
-    async addQuote(author, body)
+    async addQuote(author, body, nsfw)
     {
-        const quote = new Quote(author, body);
+        const quote = new Quote(author, body, nsfw);
         if(!await this.repository.save(quote)) {
             throw new Error("Couldn't save quote");
         }
@@ -26,9 +26,9 @@ export default class QuoteManager
         return Quote.fromData(quoteData);
     }
 
-    async getRandomQuote()
+    async getRandomQuote(hideNsfw = false)
     {
-        const quoteData = await this.repository.retrieveRandom();
+        const quoteData = await this.repository.retrieveRandom(hideNsfw);
         if(!quoteData) {
             throw new Error('Quote not found');
         }

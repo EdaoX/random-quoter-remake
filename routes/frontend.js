@@ -2,16 +2,21 @@ import express from 'express';
 import path from 'path';
 import QuoteManager from '../core/quote-manager.js';
 import JsonRepository from '../core/repositories/json-repository.js';
+import {BASE_URL} from "../config.js";
 
 const frontendRoutes = express();
 
-const repository = new JsonRepository(path.resolve('./data/quotes.json'));
+// const repository = new JsonRepository(path.resolve('./data/quotes.json'));
+const repository = new JsonRepository(path.resolve('./data/test-quotes.json'));
 const quoteManager = new QuoteManager(repository);
 
 frontendRoutes.get('/random', async (req, res) => {
+    const hideNsfw = req.query.nsfw === 'false';
+
     try {
-        const quote = await quoteManager.getRandomQuote();
+        const quote = await quoteManager.getRandomQuote(hideNsfw);
         const autoUpdate = false;
+
         res.render('quote', { quote, autoUpdate } );
     } catch (error) {
         res.send(error.toString());
@@ -19,10 +24,13 @@ frontendRoutes.get('/random', async (req, res) => {
 });
 
 frontendRoutes.get('/dash', async (req, res) => {
+    const hideNsfw = req.query.nsfw === 'false';
     try {
-        const quote = await quoteManager.getRandomQuote();
+        const quote = await quoteManager.getRandomQuote(hideNsfw);
         const autoUpdate = true;
-        res.render('quote', { quote, autoUpdate } );
+        const updateUrl =  hideNsfw ? '/api/quote/random?nsfw=false' : '/api/quote/random';
+
+        res.render('quote', { quote, autoUpdate, updateUrl } );
     } catch(error) {
         res.send(error.toString());
     }
@@ -46,8 +54,9 @@ frontendRoutes.post('/create', async (req, res) => {
 
     const body = req.body['quote-body'];
     const author = req.body['quote-author'];
+    const nsfw = !!req.body['nsfw'];
 
-    const quote = await quoteManager.addQuote(author, body);
+    const quote = await quoteManager.addQuote(author, body, nsfw);
 
     if(quote)
         res.redirect(`/quote/${quote.uuid}`);
