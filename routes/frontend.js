@@ -38,4 +38,22 @@ frontendRoutes.get('/:uuid(\\w{13}|\\w{15}|\\w{18})', async (req, res) => {
     }
 });
 
+frontendRoutes.get('/create', (req, res) => {
+    res.render('create');
+});
+
+frontendRoutes.post('/create', async (req, res) => {
+
+    const body = req.body['quote-body'];
+    const author = req.body['quote-author'];
+
+    const quote = await quoteManager.addQuote(author, body);
+
+    if(quote)
+        res.redirect(`/quote/${quote.uuid}`);
+    else
+        res.redirect('/quote/create');
+
+});
+
 export default frontendRoutes;

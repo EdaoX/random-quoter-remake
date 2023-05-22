@@ -10,7 +10,19 @@ export default class JsonRepository extends Repository
         this.filePath = filePath;
     }
 
-    async save(quote){}
+    async save(quote)
+    {
+        const quotes = await this.getQuoteData();
+        quotes.push(quote.toData());
+
+        const json = JSON.stringify(quotes);
+        try {
+            await fs.writeFile(this.filePath, json);
+            return true;
+        } catch(error) {
+            return false;
+        }
+    }
 
     async retrieve(searchedUuid)
     {

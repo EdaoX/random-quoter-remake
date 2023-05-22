@@ -7,6 +7,16 @@ export default class QuoteManager
         this.repository = repository;
     }
 
+    async addQuote(author, body)
+    {
+        const quote = new Quote(author, body);
+        if(!await this.repository.save(quote)) {
+            throw new Error("Couldn't save quote");
+        }
+
+        return quote;
+    }
+
     async getQuote(uuid)
     {
         const quoteData = await this.repository.retrieve(uuid);
