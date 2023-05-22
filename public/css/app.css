@@ -52,6 +52,11 @@ body {
     min-height: 125px;
 }
 
+.card-create-quote
+{
+    min-width: 400px;
+}
+
 .prevent-select {
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
