@@ -63,6 +63,15 @@ frontendRoutes.post('/create', async (req, res) => {
     else
         res.redirect('/quote/create');
 
+frontendRoutes.get('/debug', async (req, res) => {
+    try {
+        const quotes = await quoteManager.getAllQuotes({ });
+        res.render('debug', { debugText : syntaxHighlight(quotes) })
+    } catch (error) {
+        res.send(error.toString());
+        console.error(error);
+    }
+
 });
 
 export default frontendRoutes;
