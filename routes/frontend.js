@@ -2,7 +2,7 @@ import express from 'express';
 import {syntaxHighlight} from "../core/utilities.js";
 const frontendRoutes = express();
 
-import quoteManager from '../core/managers/test-json-manager.js'
+import quoteManager from '../core/managers/dynamodb-manager.js'
 
 
 frontendRoutes.get('/random', async (req, res) => {

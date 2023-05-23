@@ -1,5 +1,5 @@
 import express from 'express';
-import quoteManager from '../core/managers/test-json-manager.js'
+import quoteManager from '../core/managers/dynamodb-manager.js'
 
 const apiRoutes = express();
 
