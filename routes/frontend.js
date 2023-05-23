@@ -1,5 +1,6 @@
 import express from 'express';
 import {syntaxHighlight} from "../core/utilities.js";
+import {isDevelop} from "../config.js";
 const frontendRoutes = express();
 
 import quoteManager from '../core/managers/dynamodb-manager.js'
@@ -78,15 +79,17 @@ frontendRoutes.post('/create', async (req, res) => {
 
 });
 
-frontendRoutes.get('/debug', async (req, res) => {
-    try {
-        const quotes = await quoteManager.getAllQuotes({ });
-        res.render('debug', { debugText : syntaxHighlight(quotes) });
-    } catch (error) {
-        res.send(error.toString());
-        console.error(error);
-    }
+if(isDevelop) {
+    frontendRoutes.get('/debug', async (req, res) => {
+        try {
+            const quotes = await quoteManager.getAllQuotes({ });
+            res.render('debug', { debugText : syntaxHighlight(quotes) });
+        } catch (error) {
+            res.send(error.toString());
+            console.error(error);
+        }
 
-});
+    });
+}
 
 export default frontendRoutes;
