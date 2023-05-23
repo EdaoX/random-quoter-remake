@@ -39,4 +39,8 @@ export default class QuoteManager
         const data = await this.repository.retrieveAll(filter);
         return data.map(datum => Quote.fromData(datum));
     }
+
+    async delete(uuid) {
+        this.repository.delete(uuid);
+    }
 }

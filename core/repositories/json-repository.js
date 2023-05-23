@@ -39,7 +39,9 @@ export default class JsonRepository extends Repository
 
     async getQuoteData()
     {
-        const json = await fs.readFile(this.filePath, 'utf-8');
+        const json = (await fs.readFile(this.filePath, 'utf-8'));
+        if(!json)
+            return [];
         return JSON.parse(json);
     }
 
@@ -56,5 +58,12 @@ export default class JsonRepository extends Repository
 
             return true;
         });
+    }
+
+    async delete(uuid){
+        const quotes = await this.getQuoteData();
+        const remaining = quotes.filter(quoteData => quoteData.uuid !== uuid);
+        const json = JSON.stringify(remaining);
+        await fs.writeFile(this.filePath, json);
     }
 }

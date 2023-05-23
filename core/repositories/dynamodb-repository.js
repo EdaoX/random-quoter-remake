@@ -39,4 +39,10 @@ export default class DynamoDBRepository extends Repository
         const results = (await quotes.filter(filter)).results;
         return results.map(result => result.props);
     }
+
+    async delete(uuid)
+    {
+        const quotes = db.collection('quotes');
+        await quotes.delete(uuid);
+    }
 }
