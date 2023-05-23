@@ -1,0 +1,9 @@
+extends layouts/layout.pug
+
+block stylesheets
+    link(rel="stylesheet" href="../css/debug.css" crossorigin="anonymous")
+
+block content
+    pre!= debugText
+
+block scripts

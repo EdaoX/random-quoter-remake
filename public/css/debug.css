@@ -1,0 +1,23 @@
+body {
+    background: #444;
+}
+
+body pre {
+    color: white;
+}
+
+.json-key {
+    color: #99CCFF
+}
+
+.json-string {
+    color: #AFF29A;
+}
+
+.json-boolean {
+    color: #FF55CC;
+}
+
+.json-number {
+    color : #4477FF;
+}
