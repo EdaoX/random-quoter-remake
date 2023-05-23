@@ -7,4 +7,6 @@ export default class Repository
     async retrieve(uuid){}
 
     async retrieveRandom(hideNsfw = false){}
+
+    async retrieveAll(filter = {}){};
 }

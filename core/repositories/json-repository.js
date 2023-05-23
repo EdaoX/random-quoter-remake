@@ -16,12 +16,7 @@ export default class JsonRepository extends Repository
         quotes.push(quote.toData());
 
         const json = JSON.stringify(quotes);
-        try {
-            await fs.writeFile(this.filePath, json);
-            return true;
-        } catch(error) {
-            return false;
-        }
+        await fs.writeFile(this.filePath, json);
     }
 
     async retrieve(searchedUuid)
@@ -44,7 +39,22 @@ export default class JsonRepository extends Repository
 
     async getQuoteData()
     {
-        const json = await fs.readFile(this.filePath);
+        const json = await fs.readFile(this.filePath, 'utf-8');
         return JSON.parse(json);
+    }
+
+    async retrieveAll(filter = {})
+    {
+        return (await this.getQuoteData()).filter(data => {
+            const filterKeys = Object.keys(filter);
+
+            for (const key of filterKeys) {
+                if(typeof data[key] !== 'undefined' && data[key] !== filter[key]) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 }

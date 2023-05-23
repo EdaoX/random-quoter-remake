@@ -5,11 +5,16 @@ export default class Quote
 {
     constructor(author, body, nsfw = false, creationDatetime = null)
     {
-        this.setUuid(uniqid());
+        this.regenerateUuid();
         this.setAuthor(author);
         this.setBody(body);
         this.setCreationDatetime(creationDatetime || generateDatetime());
         this.setNsfw(nsfw);
+    }
+
+    regenerateUuid()
+    {
+        this.setUuid(uniqid());
     }
 
     getUuid()
