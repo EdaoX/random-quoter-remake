@@ -4,7 +4,7 @@ import quoteManager from '../core/managers/dynamodb-manager.js'
 const apiRoutes = express();
 
 apiRoutes.get('/quote/random', async (req, res) => {
-    const hideNsfw = req.query.nsfw === 'false';
+    const hideNsfw = req.query.nsfw !== 'true';
     res.setHeader('Content-Type', 'application/json');
     try {
         const quote = await quoteManager.getRandomQuote(hideNsfw);

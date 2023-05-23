@@ -7,7 +7,7 @@ import quoteManager from '../core/managers/dynamodb-manager.js'
 
 
 frontendRoutes.get('/random', async (req, res) => {
-    const hideNsfw = req.query.nsfw === 'false';
+    const hideNsfw = req.query.nsfw !== 'true';
 
     try {
         const quote = await quoteManager.getRandomQuote(hideNsfw);
@@ -26,7 +26,7 @@ frontendRoutes.get('/random', async (req, res) => {
 });
 
 frontendRoutes.get('/dash', async (req, res) => {
-    const hideNsfw = req.query.nsfw === 'false';
+    const hideNsfw = req.query.nsfw !== 'true';
     try {
         const quote = await quoteManager.getRandomQuote(hideNsfw);
         if(!quote) {
