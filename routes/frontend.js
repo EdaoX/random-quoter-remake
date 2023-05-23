@@ -81,7 +81,7 @@ frontendRoutes.post('/create', async (req, res) => {
 frontendRoutes.get('/debug', async (req, res) => {
     try {
         const quotes = await quoteManager.getAllQuotes({ });
-        res.render('debug', { debugText : syntaxHighlight(quotes) })
+        res.render('debug', { debugText : syntaxHighlight(quotes) });
     } catch (error) {
         res.send(error.toString());
         console.error(error);
