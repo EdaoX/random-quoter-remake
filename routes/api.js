@@ -14,7 +14,7 @@ apiRoutes.get('/quote/random', async (req, res) => {
             return;
         }
 
-        res.send(JSON.stringify(quote));
+        res.send(JSON.stringify({ quote : quote.toData() }));
     } catch (error) {
         res.send(JSON.stringify({error : error.toString()}));
     }
@@ -30,7 +30,7 @@ apiRoutes.get('/quote/:uuid(\\w{13}|\\w{18})', async (req, res) => {
             return;
         }
 
-        res.send(JSON.stringify(quote));
+        res.send(JSON.stringify({ quote : quote.toData() }));
     } catch (error) {
         res.send(JSON.stringify({error : error.toString()}));
     }
