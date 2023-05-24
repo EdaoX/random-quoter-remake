@@ -1,5 +1,10 @@
 extends layouts/layout.pug
 
+include includes/mixins
+
+append meta
+    +metadescription(quote.completeQuote)
+
 block content
     if updateUrl
         div.hidden(data-refresh-url=updateUrl)

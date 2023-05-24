@@ -12,6 +12,11 @@ export default class Quote
         this.setNsfw(nsfw);
     }
 
+    get completeQuote()
+    {
+        return `${this.getAuthor()} - ${this.getBody()}`;
+    }
+
     regenerateUuid()
     {
         this.setUuid(uniqid());

@@ -1,5 +1,10 @@
 extends layouts/layout.pug
 
+include includes/mixins
+
+append meta
+    +metadescription('Crea Citazione')
+
 block content
     .card.card-create-quote
         .card-body
