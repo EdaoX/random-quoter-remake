@@ -3,7 +3,7 @@ import helmet from 'helmet';
 import bodyParser from "body-parser";
 
 import * as Config from './config.js';
-import urlCompose from "./middleware/urlCompose.js";
+import urlCompose from "./middleware/url-compose.js";
 import frontendRoutes from "./routes/frontend.js";
 import apiRoutes from "./routes/api.js";
 
