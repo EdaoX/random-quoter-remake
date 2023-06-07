@@ -20,7 +20,7 @@ apiRoutes.get('/quote/random', async (req, res) => {
     }
 });
 
-apiRoutes.get('/quote/:uuid(\\w{13}|\\w{18})', async (req, res) => {
+apiRoutes.get('/quote/:uuid(\\w{13,18})', async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     try {
         const quote = await quoteManager.getQuote(req.params.uuid);

@@ -44,21 +44,6 @@ frontendRoutes.get('/dash', async (req, res) => {
     }
 });
 
-frontendRoutes.get('/:uuid(\\w{13}|\\w{15}|\\w{18})', async (req, res) => {
-    try {
-        const quote = await quoteManager.getQuote(req.params.uuid);
-        if(!quote) {
-            res.send("Quote not found");
-            return;
-        }
-        const autoUpdate = false;
-        res.render('quote', { quote, autoUpdate } );
-    } catch(error) {
-        res.send(error.toString());
-        console.error(error);
-    }
-});
-
 frontendRoutes.get('/create', (req, res) => {
     res.render('create');
 });
@@ -91,5 +76,20 @@ if(isDevelop) {
 
     });
 }
+
+frontendRoutes.get('/:uuid(\\w{13,18})', async (req, res) => {
+    try {
+        const quote = await quoteManager.getQuote(req.params.uuid);
+        if(!quote) {
+            res.send("Quote not found");
+            return;
+        }
+        const autoUpdate = false;
+        res.render('quote', { quote, autoUpdate } );
+    } catch(error) {
+        res.send(error.toString());
+        console.error(error);
+    }
+});
 
 export default frontendRoutes;
