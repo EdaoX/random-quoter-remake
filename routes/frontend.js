@@ -77,7 +77,7 @@ if(isDevelop) {
     });
 }
 
-frontendRoutes.get('/:uuid(\\w{13,18})', async (req, res) => {
+frontendRoutes.get('/:uuid(\\w{10,20})', async (req, res) => {
     try {
         const quote = await quoteManager.getQuote(req.params.uuid);
         if(!quote) {
